@@ -6,10 +6,12 @@ You can set the work dir in the program and run it. It will then access the work
 By simply create another .py script and type:
 ## Server Mode - it connects to the Server
 import <Whatever you named it> as example:
+  
 example.server.forward(('targetaddress',targetport))
 
 ## Client Mode
 import <name> as example:
+  
 example.client.forward(('targetaddress',targetport),('localhostedaddress',localhostedport))
   
 # USE IT WISELY
