@@ -10,13 +10,14 @@ lastcontent=b''
 class server:
     Sock=None
     work='H:\\Sp\\'
-    def __init__(self,forward=('localhost',80)):
+    def __init__(self,forward=('localhost',80),workdir='H:\\Sp\\',id="default"):
+        self.work=workdir
         print('Mode:Server. File->Socket(Connect):',forward[0],forward[1])
         self.addr=forward
         Soc=self.Sock=socket(AF_INET,SOCK_STREAM)
-        self.Datain=self.work+'sp'+str(forward[1])+'.datain'
-        self.Dataout=self.work+'sp'+str(forward[1])+'.dataout'
-        self.Status=self.work+'sp'+str(forward[1])+'.status'
+        self.Datain=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.datain'
+        self.Dataout=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.dataout'
+        self.Status=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.status'
         with open(self.Datain,'w') as f:
             f.write('')
         with open(self.Dataout,'w') as f:
@@ -64,14 +65,15 @@ class client:
     R=random.randint(1,20000)
     RC=R*2+1
     work='H:\\Sp\\'
-    def __init__(self,forward=('localhost',80),local=('localhost',81)):
+    def __init__(self,forward=('localhost',80),local=('localhost',81),workdir='H:\\Sp\\',id="default"):
+        self.work=workdir
         print('Mode:Client. Localsocket->File. Target:',forward[0],forward[1],'Server on local:',local[0],local[1])
         Soc=self.Sock=socket(AF_INET,SOCK_STREAM)
         Soc.bind(local)
         Soc.listen(1)
-        self.Datain=self.work+'sp'+str(forward[1])+'.dataout'
-        self.Dataout=self.work+'sp'+str(forward[1])+'.datain'
-        self.Status=self.work+'sp'+str(forward[1])+'.status'
+        self.Datain=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.dataout'
+        self.Dataout=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.datain'
+        self.Status=self.work+'sp_'+str(id)+'_'+str(forward[1])+'.status'
         with open(self.Datain,'w') as f:
             f.write('')
         with open(self.Dataout,'w') as f:
